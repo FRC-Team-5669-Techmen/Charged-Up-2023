@@ -8,6 +8,7 @@ import frc.robot.Constants.ControlSystemConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -38,7 +39,7 @@ public class RobotContainer {
   private final Drivetrain m_drivetrain = new Drivetrain();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController = new CommandXboxController(
+  private final XboxController m_joystick = new XboxController(
       ControlSystemConstants.CONTROLLER_PORT);
 
   /**
@@ -48,7 +49,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
     System.out.print("test");
-    m_drivetrain.setDefaultCommand(new ManualDifferentialDrive(0.25, 0, m_drivetrain));
+    m_drivetrain.setDefaultCommand(new ManualDifferentialDrive(() -> m_joystick.getLeftY(), () -> m_joystick.getRightX(), m_drivetrain));
 
   }
 

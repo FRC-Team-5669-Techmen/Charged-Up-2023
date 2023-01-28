@@ -28,7 +28,7 @@ public class Drivetrain extends SubsystemBase {
         super();
         m_leftMotors.setInverted(true);
         m_drive.setDeadband(0.05);
-        m_drive.setMaxOutput(1);
+        m_drive.setMaxOutput(.5);
     }
 
     public void driveDifferential(double forwardSpeed, double rotationalSpeed) {

@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import java.util.function.DoubleSupplier;
+
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -12,14 +14,14 @@ public class ManualDifferentialDrive extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final Drivetrain m_drivetrain;
 
-  private final double forwardSpeed, rotationalSpeed;
+  private final DoubleSupplier forwardSpeed, rotationalSpeed;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ManualDifferentialDrive(double forwardSpeed, double rotationalSpeed, Drivetrain subsystem) {
+  public ManualDifferentialDrive(DoubleSupplier forwardSpeed, DoubleSupplier rotationalSpeed, Drivetrain subsystem) {
     m_drivetrain = subsystem;
     addRequirements(subsystem);
     this.forwardSpeed = forwardSpeed;
@@ -35,7 +37,7 @@ public class ManualDifferentialDrive extends CommandBase {
   @Override
   public void execute() {
     System.out.print(forwardSpeed);
-    m_drivetrain.driveDifferential(forwardSpeed, rotationalSpeed);
+    m_drivetrain.driveDifferential(forwardSpeed.getAsDouble(), rotationalSpeed.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.
