@@ -7,6 +7,7 @@ package frc.robot.commands;
 import java.util.function.DoubleSupplier;
 
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.Constants.DrivetrainConstants;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
@@ -28,6 +29,10 @@ public class ManualDifferentialDrive extends CommandBase {
     this.rotationalSpeed = rotationalSpeed;
   }
 
+  public double mapNonLinearly(double input) {
+    return Math.pow(Math.abs(input), 1/DrivetrainConstants.NONLINEAR_EFFECT) * Math.signum(input);
+  }
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
@@ -37,7 +42,7 @@ public class ManualDifferentialDrive extends CommandBase {
   @Override
   public void execute() {
     System.out.print(forwardSpeed);
-    m_drivetrain.driveDifferential(forwardSpeed.getAsDouble(), rotationalSpeed.getAsDouble());
+    m_drivetrain.driveDifferential(mapNonLinearly(forwardSpeed.getAsDouble()), mapNonLinearly(rotationalSpeed.getAsDouble()));
   }
 
   // Called once the command ends or is interrupted.

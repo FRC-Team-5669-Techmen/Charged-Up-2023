@@ -23,6 +23,7 @@ public final class Constants {
     public static final int BACK_RIGHT_MOTOR = 1;
     public static final int FRONT_LEFT_MOTOR = 3;
     public static final int FRONT_RIGHT_MOTOR = 4;
+    public static final double NONLINEAR_EFFECT = 3;
   }
 
   public static class ControlSystemConstants {
