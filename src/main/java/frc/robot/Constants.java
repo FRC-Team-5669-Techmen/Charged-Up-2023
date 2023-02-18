@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean
@@ -28,5 +30,10 @@ public final class Constants {
 
   public static class ControlSystemConstants {
     public static final int CONTROLLER_PORT = 1;
+  }
+  public static class PneumaticSystemConstants {
+    public static final PneumaticsModuleType PNEUMATIC_TYPE = PneumaticsModuleType.CTREPCM;
+    public static final int FORWARD_VALVE = 0;
+    public static final int REVERSE_VALVE = 1;
   }
 }

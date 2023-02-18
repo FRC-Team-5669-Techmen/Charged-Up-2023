@@ -6,8 +6,6 @@ package frc.robot;
 
 import frc.robot.Constants.ControlSystemConstants;
 import frc.robot.commands.Autos;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -15,8 +13,11 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import frc.robot.commands.ManualDifferentialDrive;
+import frc.robot.commands.RetractWrist;
+import frc.robot.commands.DeployWrist;
 
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.WristSubsystem;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -37,6 +38,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
+  private final WristSubsystem m_wristSubsystem = new WristSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final XboxController m_joystick = new XboxController(
@@ -49,7 +51,9 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
     System.out.print("test");
-    m_drivetrain.setDefaultCommand(new ManualDifferentialDrive(() -> m_joystick.getLeftY(), () -> m_joystick.getRightX(), m_drivetrain));
+    //m_drivetrain.setDefaultCommand(new ManualDifferentialDrive(() -> m_joystick.getLeftY(), () -> m_joystick.getRightX(), m_drivetrain));
+
+
 
   }
 
@@ -73,7 +77,8 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is
     // pressed,
     // cancelling on release.
-
+    new JoystickButton(m_joystick, 5).debounce(0.1).onTrue(new DeployWrist(m_wristSubsystem));
+    new JoystickButton(m_joystick, 6).debounce(0.1).onTrue(new RetractWrist(m_wristSubsystem));
   }
 
   /**
