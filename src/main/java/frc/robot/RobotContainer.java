@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import frc.robot.commands.ManualDifferentialDrive;
+import frc.robot.commands.PullWrist;
+import frc.robot.commands.PushWrist;
 import frc.robot.commands.RetractWrist;
 import frc.robot.commands.DeployWrist;
 
@@ -51,9 +53,8 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
     System.out.print("test");
-    //m_drivetrain.setDefaultCommand(new ManualDifferentialDrive(() -> m_joystick.getLeftY(), () -> m_joystick.getRightX(), m_drivetrain));
-
-
+    m_drivetrain.setDefaultCommand(
+        new ManualDifferentialDrive(() -> m_joystick.getLeftY(), () -> m_joystick.getRightX(), m_drivetrain));
 
   }
 
@@ -77,8 +78,10 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is
     // pressed,
     // cancelling on release.
-    new JoystickButton(m_joystick, 5).debounce(0.1).onTrue(new DeployWrist(m_wristSubsystem));
-    new JoystickButton(m_joystick, 6).debounce(0.1).onTrue(new RetractWrist(m_wristSubsystem));
+    //new JoystickButton(m_joystick, 5).debounce(0.1).onTrue(new DeployWrist(m_wristSubsystem));
+    //new JoystickButton(m_joystick, 6).debounce(0.1).onTrue(new RetractWrist(m_wristSubsystem));
+    new JoystickButton(m_joystick, 3).debounce(0.1).whileTrue(new StartEndCommand(m_wristSubsystem::wristMotorPush, m_wristSubsystem::stopWristMotor, m_wristSubsystem));
+    new JoystickButton(m_joystick, 1).debounce(0.1).whileTrue(new StartEndCommand(m_wristSubsystem::wristMotorPull, m_wristSubsystem::stopWristMotor, m_wristSubsystem));
   }
 
   /**

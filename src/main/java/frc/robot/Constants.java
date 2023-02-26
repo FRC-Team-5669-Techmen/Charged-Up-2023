@@ -28,6 +28,12 @@ public final class Constants {
     public static final double NONLINEAR_EFFECT = 3;
   }
 
+  public static class WristConstants {
+    public static final int LEFT_WRIST_MOTOR = 5;
+    public static final int RIGHT_WRIST_MOTOR = 6;
+    public static final float WRIST_SPEED = 1;
+  }
+
   public static class ControlSystemConstants {
     public static final int CONTROLLER_PORT = 1;
   }
