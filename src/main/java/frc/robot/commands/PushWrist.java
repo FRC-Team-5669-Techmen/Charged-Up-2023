@@ -1,10 +1,9 @@
 package frc.robot.commands;
-
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.WristConstants;
 import frc.robot.subsystems.WristSubsystem;
 
-public class PushWrist extends InstantCommand{
+public class PushWrist extends CommandBase{
     private final WristSubsystem wrist;
     
     public PushWrist( WristSubsystem wrist) {
