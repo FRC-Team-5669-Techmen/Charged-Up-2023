@@ -32,7 +32,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public void driveDifferential(double forwardSpeed, double rotationalSpeed) {
-        m_drive.arcadeDrive(forwardSpeed, rotationalSpeed);
+        m_drive.arcadeDrive(forwardSpeed * DrivetrainConstants.DRIVE_SPEED, rotationalSpeed * DrivetrainConstants.DRIVE_SPEED);
     }
 
     public void brake() {

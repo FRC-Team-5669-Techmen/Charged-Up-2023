@@ -26,6 +26,7 @@ public final class Constants {
     public static final int FRONT_LEFT_MOTOR = 3;
     public static final int FRONT_RIGHT_MOTOR = 4;
     public static final double NONLINEAR_EFFECT = 3;
+    public static final double DRIVE_SPEED = 0.5;
   }
 
   public static class WristConstants {
@@ -34,6 +35,11 @@ public final class Constants {
     public static final float WRIST_SPEED = 1;
     public static final int WRIST_ANGLE_MOTOR_1 = 7;
     public static final int WRIST_ANGLE_MOTOR_2 = 8;
+  }
+
+  public static class ElevatorConstants {
+    public static final int ELEVATOR_MOTOR_1 = 9;
+    public static final int ELEVATOR_MOTOR_2 = 10;
   }
 
   public static class ControlSystemConstants {

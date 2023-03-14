@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -19,9 +20,14 @@ public class WristSubsystem extends SubsystemBase {
     private final DoubleSolenoid wristSolenoid = new DoubleSolenoid(PneumaticSystemConstants.PNEUMATIC_TYPE, PneumaticSystemConstants.FORWARD_VALVE, PneumaticSystemConstants.REVERSE_VALVE);
 
     private final WPI_TalonSRX m_leftWristMotor = new WPI_TalonSRX(WristConstants.LEFT_WRIST_MOTOR);
+    private final WPI_TalonSRX m_rightWristMotor = new WPI_TalonSRX(WristConstants.RIGHT_WRIST_MOTOR);
 
     private final CANSparkMax m_wristAngleMotor1 = new CANSparkMax(WristConstants.WRIST_ANGLE_MOTOR_1, MotorType.kBrushless);
     private final CANSparkMax m_wristAngleMotor2 = new CANSparkMax(WristConstants.WRIST_ANGLE_MOTOR_2, MotorType.kBrushless);
+
+    DigitalInput toplimitSwitch = new DigitalInput(0);
+    DigitalInput bottomlimitSwitch = new DigitalInput(1);
+
 
     public WristSubsystem() {
         super();
@@ -38,17 +44,23 @@ public class WristSubsystem extends SubsystemBase {
     }
 
     public void setWristMotor(double speed) {
+        if(topLimitSwitchPressed()) {
+            stopWristMotor();
+            return;
+        }
         m_leftWristMotor.set(ControlMode.PercentOutput, speed);
+        m_rightWristMotor.set(ControlMode.PercentOutput, speed);
     }
     public void wristMotorPush() {
-        m_leftWristMotor.set(ControlMode.PercentOutput, .5);
+        setWristMotor(.15);
     }
     public void wristMotorPull() {
-        m_leftWristMotor.set(ControlMode.PercentOutput, -.5);
+        setWristMotor(-.15);
     }
 
     public void stopWristMotor() {
         m_leftWristMotor.set(0);
+        m_rightWristMotor.set(0);
     }
 
     public void stopWristAngle() {
@@ -65,4 +77,11 @@ public class WristSubsystem extends SubsystemBase {
         m_wristAngleMotor1.set(-.2);
         m_wristAngleMotor2.set(-.2);
     }
+    public boolean topLimitSwitchPressed() {
+        return toplimitSwitch.get();
+    }
+    public boolean bottomLimitSwitchPressed() {
+        return bottomlimitSwitch.get();
+    }
+
 }
