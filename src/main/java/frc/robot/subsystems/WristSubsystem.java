@@ -52,7 +52,7 @@ public class WristSubsystem extends SubsystemBase {
         m_rightWristMotor.set(ControlMode.PercentOutput, speed);
     }
     public void wristMotorPush() {
-        setWristMotor(.15);
+        setWristMotor(.3);
     }
     public void wristMotorPull() {
         setWristMotor(-.15);

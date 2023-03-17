@@ -37,7 +37,7 @@ public class ElevatorSubsystem extends SubsystemBase {
         m_elevatorMotor2.set(speed);
     }
     public void raiseElevator() {
-        setElevatorMotor(.05);
+        setElevatorMotor(.3);
     }
     public void lowerElevator() {
         setElevatorMotor(-.1);
