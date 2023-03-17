@@ -33,13 +33,13 @@ public final class Constants {
     public static final int LEFT_WRIST_MOTOR = 5;
     public static final int RIGHT_WRIST_MOTOR = 6;
     public static final float WRIST_SPEED = 1;
-    public static final int WRIST_ANGLE_MOTOR_1 = 7;
-    public static final int WRIST_ANGLE_MOTOR_2 = 8;
+    public static final int WRIST_ANGLE_MOTOR_1 = 9;
+    public static final int WRIST_ANGLE_MOTOR_2 = 10;
   }
 
   public static class ElevatorConstants {
-    public static final int ELEVATOR_MOTOR_1 = 9;
-    public static final int ELEVATOR_MOTOR_2 = 10;
+    public static final int ELEVATOR_MOTOR_1 = 7;
+    public static final int ELEVATOR_MOTOR_2 = 8;
   }
 
   public static class ControlSystemConstants {

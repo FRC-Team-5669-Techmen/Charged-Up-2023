@@ -20,6 +20,7 @@ import frc.robot.commands.DeployWrist;
 
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.WristSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -41,6 +42,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final WristSubsystem m_wristSubsystem = new WristSubsystem();
+  private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final XboxController m_joystick = new XboxController(
@@ -80,10 +82,12 @@ public class RobotContainer {
     // cancelling on release.
     //new JoystickButton(m_joystick, 5).debounce(0.1).onTrue(new DeployWrist(m_wristSubsystem));
     //new JoystickButton(m_joystick, 6).debounce(0.1).onTrue(new RetractWrist(m_wristSubsystem));
-    new JoystickButton(m_joystick, 3).debounce(0.1).whileTrue(new StartEndCommand(m_wristSubsystem::wristMotorPush, m_wristSubsystem::stopWristMotor, m_wristSubsystem).until(m_wristSubsystem::topLimitSwitchPressed));
-    new JoystickButton(m_joystick, 1).debounce(0.1).whileTrue(new StartEndCommand(m_wristSubsystem::wristMotorPull, m_wristSubsystem::stopWristMotor, m_wristSubsystem).until(m_wristSubsystem::bottomLimitSwitchPressed));
-    //new JoystickButton(m_joystick, 4).debounce(0.1).whileTrue(new StartEndCommand(m_wristSubsystem::wristAngleUp, m_wristSubsystem::stopWristAngle, m_wristSubsystem));
-    //new JoystickButton(m_joystick, 2).debounce(0.1).whileTrue(new StartEndCommand(m_wristSubsystem::wristAngleDown, m_wristSubsystem::stopWristAngle, m_wristSubsystem));
+    //new JoystickButton(m_joystick, 3).debounce(0.1).whileTrue(new StartEndCommand(m_wristSubsystem::wristMotorPush, m_wristSubsystem::stopWristMotor, m_wristSubsystem).until(m_wristSubsystem::topLimitSwitchPressed));
+    //new JoystickButton(m_joystick, 1).debounce(0.1).whileTrue(new StartEndCommand(m_wristSubsystem::wristMotorPull, m_wristSubsystem::stopWristMotor, m_wristSubsystem).until(m_wristSubsystem::bottomLimitSwitchPressed));
+    new JoystickButton(m_joystick, 3).debounce(0.1).whileTrue(new StartEndCommand(m_elevatorSubsystem::raiseElevator, m_elevatorSubsystem::stopElevator, m_elevatorSubsystem));
+    new JoystickButton(m_joystick, 1).debounce(0.1).whileTrue(new StartEndCommand(m_elevatorSubsystem::lowerElevator, m_elevatorSubsystem::stopElevator, m_elevatorSubsystem));
+    new JoystickButton(m_joystick, 4).debounce(0.1).whileTrue(new StartEndCommand(m_wristSubsystem::wristAngleUp, m_wristSubsystem::stopWristAngle, m_wristSubsystem));
+    new JoystickButton(m_joystick, 2).debounce(0.1).whileTrue(new StartEndCommand(m_wristSubsystem::wristAngleDown, m_wristSubsystem::stopWristAngle, m_wristSubsystem));
   }
 
   /**

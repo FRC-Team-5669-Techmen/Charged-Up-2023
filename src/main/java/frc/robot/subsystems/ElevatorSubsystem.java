@@ -19,8 +19,8 @@ public class ElevatorSubsystem extends SubsystemBase {
     private final CANSparkMax m_elevatorMotor1 = new CANSparkMax(ElevatorConstants.ELEVATOR_MOTOR_1, MotorType.kBrushless);
     private final CANSparkMax m_elevatorMotor2 = new CANSparkMax(ElevatorConstants.ELEVATOR_MOTOR_2, MotorType.kBrushless);
 
-    DigitalInput toplimitSwitch = new DigitalInput(0);
-    DigitalInput bottomlimitSwitch = new DigitalInput(1);
+    //DigitalInput toplimitSwitch = new DigitalInput(0);
+    //DigitalInput bottomlimitSwitch = new DigitalInput(1);
 
 
     public ElevatorSubsystem() {
@@ -30,29 +30,31 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     public void setElevatorMotor(double speed) {
         if(topLimitSwitchPressed()) {
-            stopWristMotor();
+            stopElevator();
             return;
         }
         m_elevatorMotor1.set(speed);
         m_elevatorMotor2.set(speed);
     }
-    public void wristMotorPush() {
-        setElevatorMotor(.15);
+    public void raiseElevator() {
+        setElevatorMotor(.05);
     }
-    public void wristMotorPull() {
-        setElevatorMotor(-.15);
+    public void lowerElevator() {
+        setElevatorMotor(-.1);
     }
 
-    public void stopWristMotor() {
+    public void stopElevator() {
         m_elevatorMotor1.set(0);
         m_elevatorMotor2.set(0);
     }
 
     public boolean topLimitSwitchPressed() {
-        return toplimitSwitch.get();
+        //return toplimitSwitch.get();
+        return false;
     }
     public boolean bottomLimitSwitchPressed() {
-        return bottomlimitSwitch.get();
+        //return bottomlimitSwitch.get();
+        return false;
     }
 
 }
